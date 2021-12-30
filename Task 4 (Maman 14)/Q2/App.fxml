@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppController">
+   <children>
+      <Button fx:id="deleteBtn" layoutX="443.0" layoutY="185.0" mnemonicParsing="false" onAction="#deletePressed" prefHeight="31.0" prefWidth="113.0" text="Delete" />
+      <Button fx:id="importBtn" layoutX="443.0" layoutY="291.0" mnemonicParsing="false" onAction="#importContacts" prefHeight="31.0" prefWidth="113.0" text="Import" />
+      <Button fx:id="exportBtn" layoutX="443.0" layoutY="333.0" mnemonicParsing="false" onAction="#exportContacts" prefHeight="31.0" prefWidth="113.0" text="Export" />
+      <Label contentDisplay="CENTER" layoutX="213.0" layoutY="21.0" prefHeight="27.0" prefWidth="170.0" text="Contacts Book" textAlignment="CENTER">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <TextField fx:id="searchBar" layoutX="83.0" layoutY="69.0" onAction="#searchByName" prefHeight="31.0" prefWidth="284.0" promptText="Search Contact By Name" />
+      <Button fx:id="addBtn" layoutX="443.0" layoutY="92.0" mnemonicParsing="false" onAction="#addPressed" prefHeight="31.0" prefWidth="113.0" text="Add" />
+      <ListView fx:id="contactList" layoutX="57.0" layoutY="107.0" prefHeight="257.0" prefWidth="340.0" />
+      <Button fx:id="updateBtn" layoutX="443.0" layoutY="138.0" mnemonicParsing="false" onAction="#updatePressed" prefHeight="31.0" prefWidth="113.0" text="Update" />
+   </children>
+</AnchorPane>
