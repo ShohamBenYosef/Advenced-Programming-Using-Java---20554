@@ -1,9 +1,7 @@
-package com.company;
-
 public class IllegalArgumentException extends Exception{
 
     public IllegalArgumentException(){
-        super();
+        super(); // Exception.
     }
 
     public IllegalArgumentException(String message){

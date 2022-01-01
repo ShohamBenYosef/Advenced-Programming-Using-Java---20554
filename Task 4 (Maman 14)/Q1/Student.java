@@ -1,8 +1,3 @@
-package com.company;
-
-import java.util.Date;
-import java.util.Map;
-
 public class Student implements Comparable<Student> {
 
     // variables
@@ -46,10 +41,8 @@ public class Student implements Comparable<Student> {
         this.birthYear = year;
     }
 
-
-
     @Override
-    public int compareTo(Student other) {
+    public int compareTo(Student other) { // Compare Student with I.D variable
         return id - other.getId();
     }
 

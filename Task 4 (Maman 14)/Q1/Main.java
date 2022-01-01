@@ -1,45 +1,37 @@
-package com.company;
-
-
-import java.util.ArrayList;
-import java.util.Map;
-
 public class Main {
 
     public static void main(String[] args) throws IllegalArgumentException {
 
+        Student st1 = new Student("Shir", "SA", 111, 1993);
+        Student st2 = new Student("Ruth", "QW", 222, 1994);
+        Student st3 = new Student("Or", "ER", 333, 1998);
+        Student st4 = new Student("Ron", "VF", 444, 1991);
+        Student st5 = new Student("Yair", "NH", 555, 1990);
+        Student st6 = new Student("Tom", "JH", 666, 2000);
 
-        ArrayList<Integer> keys = new ArrayList<Integer>();
-        ArrayList<Integer> values = new ArrayList<Integer>();
+        Student st7 = new Student("new", "one", 777, 1880);
 
-        Student st1 = new Student("s", "b", 111, 1993);
-        Student st2 = new Student("t", "c", 222, 1994);
-        Student st3 = new Student("r", "a", 333, 1995);
+        String[] phoneNumValues = {"05236", "04515", "78541", "95821", "32569", "58340"};
+        Student[] studentsKeys = {st1, st2, st3, st4, st5, st6};
 
-        for (int i=0; i<10; i++){
-            keys.add(i);
-            values.add(i+3);
+
+        try {
+            AssociationTable<Student, String> phoneBook = new AssociationTable<Student, String>(studentsKeys, phoneNumValues);
+
+            System.out.println("get( st3): " + phoneBook.get(st3)); // should be 78541
+
+            System.out.println("remove( st3): " + phoneBook.remove(st3)); // should be true
+            System.out.println("print st3 - check remove: " + phoneBook.get(st3)); // should be null
+
+            System.out.println(phoneBook.contains(st5));  // should be true
+
+            phoneBook.add(st7, "8452000000");
+            System.out.println(phoneBook.get(st7)); // should be 8452000000
+
+
+        }catch (java.lang.IllegalArgumentException e){
+            throw new IllegalArgumentException("Key/Value not the same size.");
         }
-
-
-       // try {
-            AssociationTable<Student, String> a1 = new AssociationTable<Student, String>();
-            a1.add(st1,"052456");
-            a1.add(st2,"053753");
-            a1.add(st3,"058159");
-;
-
-            for(Map.Entry<Student, String> entry : a1.entrySet())
-                System.out.println("["+entry.getKey().getFirstName()+", "+entry.getValue()+"]");
-
-
-            a1.remove(st1);
-        System.out.println();
-            for(Map.Entry<Student, String> entry : a1.entrySet())
-                System.out.println("["+entry.getKey().getFirstName()+", "+entry.getValue()+"]");
-       // } catch (IllegalArgumentException e){
-       //     throw new IllegalArgumentException("Keys and Values size are not the same.");
-       // }
 
 
     }
