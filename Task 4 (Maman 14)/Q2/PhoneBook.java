@@ -11,11 +11,12 @@ public class PhoneBook{
 
     private HashMap<String, String> book;
 
-
+    // Constructor.
     public PhoneBook(){
         book = new HashMap<String,String>();
     }
 
+    // get
     public HashMap<String, String> getBook(){
         return book;
     }
@@ -30,7 +31,7 @@ public class PhoneBook{
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        // foreach
+        // foreach loop to print every element in the structure
         for (Map.Entry<String,String> entry : getBook().entrySet()) {
             out.println(entry.getKey() + "\t,\t" + entry.getValue());
         }
@@ -46,20 +47,13 @@ public class PhoneBook{
      */
     public void readTableFromFile(String fileName) throws IOException{
         String[] arr = new String[2]; //array for 2 words in line.
-        //try{
             Scanner s = new Scanner(new File(fileName));
             while (s.hasNext()){
                 String line  = s.nextLine();
                 arr = line.split("\t,\t");  // put each word in in cell so we can use it for 'put' func:
                 getBook().put( arr[0], arr[1]);
-            //}
+            }
             s.close();
-        /*} catch (IOException e){ // file error exception
-            System.out.println("there is no such file.");
-        }*/
-        }
-
-
     }
 }
 
