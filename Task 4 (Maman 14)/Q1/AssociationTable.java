@@ -10,39 +10,43 @@ public class AssociationTable<E extends Comparable<E>, T> extends TreeMap<E,T>{
     private TreeMap<E, T> map;
 
 
-    // Constructor:
+    //Default Constructor
     public AssociationTable(){
         super();
     }
+    // Constructor
+    public AssociationTable(ArrayList<E> key, ArrayList<T> val) throws IllegalArgumentException{
+        map = new TreeMap<E, T>();
 
-    public AssociationTable(ArrayList<E> key, ArrayList<E> val) {
-        try {
+        // edge case (too many keys or values):
+        if(key.size() != val.size())
+            throw new IllegalArgumentException("Size arnt the same.");
 
-        }catch (Exception e){
-
+        for(int i=0; i<key.size(); i++){
+            map.put(key.get(i), val.get(i));
         }
-
     }
 
+    //Add node to treeMap
     public void add(E key, T val){
-        if(this.containsKey(key))
+        if(this.containsKey(key)) // check if alredy exist.
             this.replace(key, val);
         this.put(key, val);
     }
-
+    // return node with given key
     public T get(E key){
-        if (map.containsKey(key))
+        if (map.containsKey(key)) //check if the treeMap contain the node
             return (T) map.get(key);
         return null;
     }
-
+    // //check if the treeMap contain the node with 'key' key
     public Boolean contains(E key){
         if(map.containsKey(key))
             return true;
         return false;
     }
 
-
+    // remove given node from the treeMap
     public boolean remove(E key) {
         if (map.containsKey(key)){
             map.remove(key);
@@ -51,13 +55,14 @@ public class AssociationTable<E extends Comparable<E>, T> extends TreeMap<E,T>{
         return false;
     }
 
+    // return the size of the treeMap (int)
     public int size(){
         return super.size();
     }
 
-    /*public Iterator keyIterator() {
-        AssociationTable<E, T> map = new AssociationTable<>();
-        for (Iterator<E> it = map.iterato)
-    }*/
+    // iterator
+    public Iterator keyIterator() {
+        return this.map.keySet().iterator();
+    }
 }
 
