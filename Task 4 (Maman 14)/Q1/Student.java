@@ -3,35 +3,54 @@ package com.company;
 import java.util.Date;
 import java.util.Map;
 
-public class Student {
+public class Student implements Comparable<Student> {
 
+    // variables
     private String firstName;
     private String lastName;
-    private long id;
+    private int id;
     private int birthYear;
 
-
-    public Student(String firstName, String lastName,long id, int birthday){
+    // const
+    public Student(String firstName, String lastName,int id, int birthday){
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;
         this.birthYear = birthday;
     }
 
-    public static void main(String[] args) {
+    // get
+    public String getFirstName() {
+        return this.firstName;
+    }
+    public String getLastName() {
+        return this.lastName;
+    }
+    public int getId() {
+        return this.id;
+    }
+    public int getBirthYear() {
+        return this.birthYear;
+    }
+    // set
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setBirthYear(int year) {
+        this.birthYear = year;
+    }
 
-        Student s = new Student("s", "b", 111, 1993);
-        Student t = new Student("t", "c", 222, 1994);
-        Student r = new Student("r", "a", 333, 1995);
-/*
-        try {
-            AssociationTable<Student, String> a1 = new AssociationTable<Student, String>();
-            a1.add(s,"052");
 
-            for(Map.Entry<Student, String> entry : a1.entrySet())
-                System.out.println("["+entry.getKey()+", "+entry.getValue()+"]");
-*/
-        }
+
+    @Override
+    public int compareTo(Student other) {
+        return id - other.getId();
     }
 
 }
