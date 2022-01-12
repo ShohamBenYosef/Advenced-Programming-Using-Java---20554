@@ -19,27 +19,29 @@ public class AirPort {
     public String getPortName() {
         return portName;
     }
-    // Setters
+    /* Setters
     public void setNumOfLines(int numOfLines) {
         this.numOfLines = numOfLines;
     }
     public void setPortName(String portName) {
         this.portName = portName;
     }
-
-
+     */
 
 
 
     public synchronized int depart(int numOfFlight){
-        while(numOfLines <= numOfFlight){ // not my turn
+        System.out.println("flight number " + numOfFlight + " want to depart.");
+        while(numOfLines == 0){ // not my turn
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println("avlable line to depart: "+numOfLines);
+        System.out.print( numOfFlight + " depart from line " + numOfLines);
+        numOfLines--;
+        System.out.println(" there is "+numOfLines+" more lines..");
         return numOfLines;
     }
 
@@ -47,15 +49,17 @@ public class AirPort {
 
 
 
-    public int land(int numOfFlight){
-        while(numOfLines <= numOfFlight){ // not my turn
+    public synchronized int land(int numOfFlight){
+        while(numOfLines == 0){ // not my turn
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println("avlable line to land: "+numOfLines);
+        System.out.println("land: "+numOfLines);
+        numOfLines--;
+        System.out.println("there is "+numOfLines+" more lines..");
         return numOfLines;
     }
 
@@ -63,11 +67,14 @@ public class AirPort {
 
 
 
-    public synchronized void freeRunway(int numOfFlight, int runwayNum){
+    public synchronized int freeRunway(int numOfFlight, int runwayNum){
         numOfLines++;
+        System.out.println("there is "+numOfLines+" more lines in " + getPortName());
         notifyAll();
-        return;
+        return numOfLines;
     }
+
+
 
 
 

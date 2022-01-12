@@ -8,7 +8,7 @@ public class Flight extends Thread{
     private AirPort source;
     private AirPort target;
 
-    final static int MAX_MSEC = 5000, MIN_MSEC = 2000;
+    final static int MAX_MSEC = 50, MIN_MSEC = 20;
 
     // Constructor
     public Flight(int numOfFlight, AirPort source, AirPort target){
@@ -44,7 +44,9 @@ public class Flight extends Thread{
         super.run();
 
 
-        int runwayNum = this.source.depart(numOfFlight);
+        System.out.println("flight number "+numOfFlight+" is ready");
+
+        int runwayNum = source.depart(numOfFlight);
         departAndLandingTime();
         this.source.freeRunway(numOfFlight, runwayNum);
         flightAirTime();
@@ -55,7 +57,8 @@ public class Flight extends Thread{
     }
 
 
-    private void departAndLandingTime(){
+    public void departAndLandingTime(){
+        System.out.println("departAndLandingTime for" + this.numOfFlight);
         Random random = new Random();
         try {
             sleep(random.nextInt(MAX_MSEC-MIN_MSEC) + MIN_MSEC);
@@ -65,6 +68,7 @@ public class Flight extends Thread{
     }
 
     private void flightAirTime(){
+        System.out.println("flightAirTime for" + this.numOfFlight);
         Random random = new Random();
         try {
             sleep(random.nextInt(MAX_MSEC-MIN_MSEC) + MIN_MSEC);
