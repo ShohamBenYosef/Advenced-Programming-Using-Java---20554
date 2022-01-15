@@ -28,10 +28,15 @@ public class Main {
             arr[i] = random.nextInt(MAX_VAL) + MIN_VAL;
             System.out.print(arr[i]+"\t");
         }
-
+        System.out.println("\n\n 1");
         // send array to mergeSort
+        MergeSort mergeSort = new MergeSort(num, arr);
+        mergeSort.runMerge();
 
-
+        // print sorted arr
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]+"\t");
+        }
     }
 
 }

@@ -27,17 +27,15 @@ public class QueueThread {
         return queue.get(1);
     }
 
-    public synchronized boolean notEmpty(){
-        while (!queue.isEmpty()){
+    public synchronized boolean canContinue() {
+        if(queue.get(0)==null)
             try {
                 wait();
-            }catch (InterruptedException e){
+            } catch(InterruptedException e) {
                 e.printStackTrace();
+                System.exit(1);
             }
-        }
-        if (!queue.isEmpty())
-            return true;
-        return false;
+        return queue.get(0) != null && queue.get(0).length < max;
     }
 
 
