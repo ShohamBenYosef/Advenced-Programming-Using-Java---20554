@@ -1,4 +1,3 @@
-package com.company;
 
 public class AirPort {
 
@@ -19,6 +18,7 @@ public class AirPort {
     public String getPortName() {
         return portName;
     }
+
     /* Setters
     public void setNumOfLines(int numOfLines) {
         this.numOfLines = numOfLines;
@@ -31,7 +31,7 @@ public class AirPort {
 
 
     public synchronized int depart(int numOfFlight){
-        System.out.println("flight number " + numOfFlight + " want to depart.");
+        System.out.println("Flight Number " + numOfFlight + " Ready to depart.");
         while(numOfLines == 0){ // not my turn
             try {
                 wait();
@@ -39,9 +39,9 @@ public class AirPort {
                 e.printStackTrace();
             }
         }
-        System.out.print( numOfFlight + " depart from line " + numOfLines);
+        System.out.println( "Flight Num " +numOfFlight + " Depart From Line " + numOfLines);
         numOfLines--;
-        System.out.println(" there is "+numOfLines+" more lines..");
+        System.out.println("There Are "+numOfLines+" More Lines At " + getPortName());
         return numOfLines;
     }
 
@@ -57,9 +57,9 @@ public class AirPort {
                 e.printStackTrace();
             }
         }
-        System.out.println("land: "+numOfLines);
+        System.out.println("Flight Number " + numOfFlight + " Land At "+numOfLines);
         numOfLines--;
-        System.out.println("there is "+numOfLines+" more lines..");
+        System.out.println("There Are "+numOfLines+" More Lines At " + getPortName());
         return numOfLines;
     }
 
@@ -69,7 +69,7 @@ public class AirPort {
 
     public synchronized int freeRunway(int numOfFlight, int runwayNum){
         numOfLines++;
-        System.out.println("there is "+numOfLines+" more lines in " + getPortName());
+        System.out.println("There Are "+numOfLines+" More Lines At " + getPortName());
         notifyAll();
         return numOfLines;
     }

@@ -1,14 +1,13 @@
-package com.company;
 
 import java.util.Random;
 
 public class Flight extends Thread{
-
     private int numOfFlight;
     private AirPort source;
     private AirPort target;
+    Random random = new Random();
 
-    final static int MAX_MSEC = 50, MIN_MSEC = 20;
+    final static int MAX_MSEC = 50, MIN_MSEC = 20; //
 
     // Constructor
     public Flight(int numOfFlight, AirPort source, AirPort target){
@@ -44,7 +43,7 @@ public class Flight extends Thread{
         super.run();
 
 
-        System.out.println("flight number "+numOfFlight+" is ready");
+        System.out.println("Flight Number "+numOfFlight+" Is Ready To Fly From " + source.getPortName() + " To " + target.getPortName());
 
         int runwayNum = source.depart(numOfFlight);
         departAndLandingTime();
@@ -58,8 +57,7 @@ public class Flight extends Thread{
 
 
     public void departAndLandingTime(){
-        System.out.println("departAndLandingTime for" + this.numOfFlight);
-        Random random = new Random();
+        System.out.println("Depart And Landing Time - For Flight Number " + this.numOfFlight);
         try {
             sleep(random.nextInt(MAX_MSEC-MIN_MSEC) + MIN_MSEC);
         } catch (InterruptedException e) {
@@ -68,8 +66,7 @@ public class Flight extends Thread{
     }
 
     private void flightAirTime(){
-        System.out.println("flightAirTime for" + this.numOfFlight);
-        Random random = new Random();
+        System.out.println("Time On Air - For Flight Number " + this.numOfFlight);
         try {
             sleep(random.nextInt(MAX_MSEC-MIN_MSEC) + MIN_MSEC);
         } catch (InterruptedException e) {

@@ -24,7 +24,7 @@ public class MergeSort{
 
     public int[] runMerge(){
         System.out.println("4");
-        while(queue.canContinue()){
+        while(queue.running()){
             System.out.println("5");
             new MergeThread(this.queue.pop(), this.queue.pop(), this.queue).start();
 

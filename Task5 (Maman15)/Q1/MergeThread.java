@@ -21,7 +21,9 @@ public class MergeThread extends Thread{
     public void run() {
         super.run();
 
-        while (queue.canContinue()) {
+
+
+        while (queue.running()) {
             System.out.println("7 ");
             int i = 0, j = 0, s = 0;
             // i -> arr1, j -> arr2, s for sorted arr

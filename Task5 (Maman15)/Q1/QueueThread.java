@@ -1,7 +1,7 @@
 package com.company;
 import java.util.ArrayList;
 
-public class QueueThread {
+public class QueueThread extends Thread{
 
     private ArrayList<int[]> queue;
     private int max;
@@ -27,15 +27,14 @@ public class QueueThread {
         return queue.get(1);
     }
 
-    public synchronized boolean canContinue() {
+    public synchronized boolean running() {
         if(queue.get(0)==null)
             try {
                 wait();
             } catch(InterruptedException e) {
                 e.printStackTrace();
-                System.exit(1);
             }
-        return queue.get(0) != null && queue.get(0).length < max;
+        return queue.get(queue.size()-1) != null && queue.get(queue.size()-1).length < max;
     }
 
 
