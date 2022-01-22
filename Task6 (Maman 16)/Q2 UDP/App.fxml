@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppController">
+   <children>
+      <ListView fx:id="list" layoutX="48.0" layoutY="27.0" prefHeight="214.0" prefWidth="240.0" />
+      <Button fx:id="sendBtn" layoutX="368.0" layoutY="100.0" mnemonicParsing="false" onAction="#sendPressed" prefHeight="68.0" prefWidth="128.0" text="Send!" />
+      <TextField fx:id="textF" layoutX="47.0" layoutY="281.0" prefHeight="68.0" prefWidth="498.0" />
+   </children>
+</AnchorPane>

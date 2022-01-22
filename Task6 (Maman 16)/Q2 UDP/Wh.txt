@@ -1,0 +1,8 @@
+Tel Aviv, 20 up to 24, 21 up to 24, 20 up to 24, Sunny
+Paris, 2 up to 5, 2 up to 4, 1 up to 3, Cloudy
+London, 7 up to 10, 8 up to 11,7 up to 9, rainy
+Moscow, 0 up to 4, 1 up to 4, 1 up to 5, Snowy
+Warsaw, 0 up to 2, 1 up to 3, 2 up to 5, rainy
+Helsinki, 0 up to 1, 1 up to 3, 3 up to 5, Snowy
+Nassau, 20 up to 23, 22 up to 24, 24 up to 26, Sunny
+Ottawa , -1 up to 0, 0 up to 3, 2 up to 5, Snowy
