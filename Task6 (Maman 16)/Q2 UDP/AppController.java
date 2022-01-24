@@ -1,20 +1,15 @@
-import java.io.File;
-import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.Scanner;
+import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-public class AppController {
-
-    private static final String HOST = "localhost";
-    private static final String PATH = "C:/Java/test1/Test/src/Wh.txt";
+public class AppController extends Thread{
 
     @FXML
     private ListView<String> list;
@@ -27,86 +22,77 @@ public class AppController {
 
     @FXML
     void sendPressed(ActionEvent event) {
-        textF.clear();
         DatagramSocket clientSocket = null;
-        try{
-            clientSocket = new DatagramSocket();
-            InetAddress iPAddress = InetAddress.getByName(HOST);
-            sendToserver(clientSocket, iPAddress);
-            //getFromServer(clientSocket);
 
-        }catch(Exception e){
+        try {
+            clientSocket = new DatagramSocket();
+            InetAddress iPAddress = InetAddress.getByName("127.0.0.1"); // localhost
+
+            sendToServer(clientSocket, iPAddress);
+            getFromServer(clientSocket);
+
+            clientSocket.close();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-        String selectedContact = list.getSelectionModel().getSelectedItem();
-        System.out.println(selectedContact);
-        searchCapitalWeatherByName(selectedContact);
     }
 
-    @FXML
     public void initialize(){
-        openFileAndReadToList("Wh.txt");
+        setCitiesOnList();
     }
 
-    public void sendToserver(DatagramSocket socket, InetAddress ip) {
-        String sentence = textF.getText();
-        textF.clear();
+
+
+
+    // Send String of chosen city to server
+    public void sendToServer(DatagramSocket socket, InetAddress ip){
+
+        String sentence = list.getSelectionModel().getSelectedItem();
 
         byte[] data = new byte[1024];
         data = sentence.getBytes();
-        DatagramPacket packet = new DatagramPacket(data, data.length, ip, 9872);
 
+        DatagramPacket packet = new DatagramPacket(data, data.length, ip, 9876);
 
-        try{
+        try {
             socket.send(packet);
-        }catch(IOException exception){
-            exception.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
     }
 
+    // receive String of weathe from Server
+    public void getFromServer(DatagramSocket socket) {
+        byte[] receiveData = new byte[1024];
+        DatagramPacket packet = new DatagramPacket(receiveData, receiveData.length);
 
-
-
-    // Logic methods.
-
-    public void searchCapitalWeatherByName(String city) {
         try {
-            Scanner scanner = new Scanner(new File("C:/Java/test1/Test/src/Wh.txt"));
-            while(scanner.hasNextLine()){
-                String[] temp = new String[5];
-                String line = scanner.nextLine();
-                System.out.println(line);
-                temp = line.split(",");
-                if(temp[0].equals(city)){
-                    textF.setText("today "+temp[0]+"is "+temp[4]+" and "+temp[1]+" degrees\n ,tomorrow will be "+temp[2] +" And the day after tomorrow will be "+temp[3]);
-                    break;
-                }
-            }
-            scanner.close();
-        } catch (IOException e) {
-            System.out.println("error with files. ");
+            socket.receive(packet);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
+        receiveData = packet.getData();
+        int len = packet.getLength();
+        String modifiedSentence = new String((receiveData)).substring(0,len);
+        // set it on javaFx text object
+        textF.setText(modifiedSentence);
     }
 
-    public void openFileAndReadToList(String fileString) {
+    // Set Cities in list to user to choose from.
+    public void setCitiesOnList(){
         try {
-            Scanner scanner = new Scanner(new File(PATH));
+            Scanner scanner = new Scanner(new File("Cities"));
             while(scanner.hasNext()){
-                String[] temp = new String[5];
                 String line = scanner.nextLine();
-                temp = line.split(",");
-                list.getItems().add(temp[0]);
 
+                list.getItems().add(line);
             }
             scanner.close();
-        } catch (IOException e) {
-            System.out.println("error with files.");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
     }
 
 }

@@ -12,12 +12,13 @@ public class App extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("App.fxml"));
 
         Scene scene = new Scene(root, 580, 400);
-        primaryStage.setTitle("Random Shapes");
+        primaryStage.setTitle("Cities Weather");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     public static void main(String[] args) {
+        new UdpServer().start();
         launch(args);
     }
 }
