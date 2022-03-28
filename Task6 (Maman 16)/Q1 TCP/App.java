@@ -12,12 +12,14 @@ public class App extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("App.fxml"));
 
         Scene scene = new Scene(root, 580, 400);
-        primaryStage.setTitle("Random Shapes");
+        primaryStage.setTitle("TCP Chat App");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     public static void main(String[] args) {
+        Server server = new Server(8818);
+        server.start();
         launch(args);
     }
 }

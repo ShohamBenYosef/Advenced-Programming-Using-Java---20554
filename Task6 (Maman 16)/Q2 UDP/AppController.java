@@ -83,7 +83,7 @@ public class AppController extends Thread{
     // Set Cities in list to user to choose from.
     public void setCitiesOnList(){
         try {
-            Scanner scanner = new Scanner(new File("Cities"));
+            Scanner scanner = new Scanner(new File("Cities.txt"));
             while(scanner.hasNext()){
                 String line = scanner.nextLine();
 
